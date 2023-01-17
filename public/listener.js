@@ -4,7 +4,7 @@ $(document).ready(function() {
 		const message = $('#chatbot-input').val();
 		$.ajax({
 			type: 'POST',
-			url: 'https://number-trivia.onrender.com',
+			url: 'https://number-trivia.onrender.com/chatbot',
 			data: {
 				message: message
 			},
