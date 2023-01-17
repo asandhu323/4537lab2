@@ -4,6 +4,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 const axios = require('axios');
+const cors = require('cors');
+app.use(cors());
 
 app.get('/', function(req, res) {
   res.sendFile(__dirname + "/index.html");
