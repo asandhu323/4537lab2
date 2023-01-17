@@ -2,14 +2,20 @@ const express = require('express');
 const app = express(); 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/public'));
+const axios = require('axios');
+
+app.get('/', function(req, res) {
+  res.sendFile(__dirname + "/index.html");
+})
 
 app.post('/chatbot', (req, res) => {
 	const message = req.body.message;
 	const number = message.match(/\d+/);
 	if (number) {
-		fetch(`http://numbersapi.com/${number}`).then(response => response.text()).then(data => {
+		axios.get(`http://numbersapi.com/${number[0]}`).then(response => {
 			res.json({
-				text: data
+				text: response.data
 			});
 		}).catch(error => {
 			res.json({
